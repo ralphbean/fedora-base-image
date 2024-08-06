@@ -1,0 +1,20 @@
+contentOrigin:
+  repofiles:
+    - ./fedora.repo
+    - ./fedora-updates.repo
+packages:
+  - bash
+  - coreutils-single
+  - coreutils-single
+  - crypto-policies-scripts
+  - findutils
+  - gdb-gdbserver
+  - glibc-minimal-langpack
+  - glibc-minimal-langpack
+  - gzip
+  - langpacks-en
+  - fedora-release
+  - rootfiles
+  - tar
+  - vim-minimal
+  - dnf
