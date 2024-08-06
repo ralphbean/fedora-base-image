@@ -20,7 +20,7 @@ RUN \
         rootfiles \
         tar \
         vim-minimal \
-        yum \
+        dnf \
         --releasever "$version" --setopt install_weak_deps=false --nodocs -y; \
     dnf --installroot /mnt/rootfs clean all
 
