@@ -22,6 +22,9 @@ RUN \
         --releasever "40" --setopt install_weak_deps=false --nodocs -y; \
     dnf --installroot /mnt/rootfs clean all
 
+RUN ls -alh /mnt/rootfs/usr
+RUN ls -alh /mnt/rootfs/usr/bin
+RUN mkdir /mnt/rootfs/bin && cp /mnt/rootfs/usr/bin/sh /mnt/rootfs/bin/sh
 RUN rm -rf /mnt/rootfs/var/cache/* /mnt/rootfs/var/log/dnf* /mnt/rootfs/var/log/yum.*
 
 FROM scratch
