@@ -2,6 +2,8 @@ FROM registry.fedoraproject.org/fedora:40 as builder
 
 RUN mkdir -p /mnt/rootfs
 
+RUN sed -i 's|gpgcheck|gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch\ngpgcheck|g' /etc/yum.repos.d/cachi2.repo || true
+
 RUN \
     dnf install --installroot /mnt/rootfs \
         bash \
@@ -19,7 +21,7 @@ RUN \
         tar \
         vim-minimal \
         dnf \
-        --releasever "40" --setopt install_weak_deps=false --nodocs -y; \
+        --releasever "40" --setopt install_weak_deps=false --nodocs -y && \
     dnf --installroot /mnt/rootfs clean all
 
 RUN rm -rf /mnt/rootfs/var/cache/* /mnt/rootfs/var/log/dnf* /mnt/rootfs/var/log/yum.*
