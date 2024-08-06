@@ -1,7 +1,5 @@
-ARG version
-FROM registry.fedoraproject.org/fedora:$version as builder
+FROM registry.fedoraproject.org/fedora:40 as builder
 
-ARG version
 RUN mkdir -p /mnt/rootfs
 
 RUN \
@@ -21,23 +19,22 @@ RUN \
         tar \
         vim-minimal \
         dnf \
-        --releasever "$version" --setopt install_weak_deps=false --nodocs -y; \
+        --releasever "40" --setopt install_weak_deps=false --nodocs -y; \
     dnf --installroot /mnt/rootfs clean all
 
 RUN rm -rf /mnt/rootfs/var/cache/* /mnt/rootfs/var/log/dnf* /mnt/rootfs/var/log/yum.*
 
 FROM scratch
 
-ARG version
 LABEL license="MIT",
 LABEL name="fedora",
 LABEL org.opencontainers.image.license="MIT",
 LABEL org.opencontainers.image.name="fedora",
 LABEL org.opencontainers.image.url="https://fedoraproject.org/",
 LABEL org.opencontainers.image.vendor="Fedora Project",
-LABEL org.opencontainers.image.version="$version",
+LABEL org.opencontainers.image.version="40",
 LABEL vendor="Fedora Project",
-LABEL version="$version"
+LABEL version="40"
 
 COPY --from=builder /mnt/rootfs/ /
 RUN rm -rf /etc/yum.repos.d/*.repo
