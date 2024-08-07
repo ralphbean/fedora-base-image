@@ -19,7 +19,7 @@ RUN \
         tar \
         vim-minimal \
         dnf \
-        --releasever "40" --setopt install_weak_deps=false --nodocs -y; \
+        --releasever "40" --setopt install_weak_deps=false --nodocs -y && \
     dnf --installroot /mnt/rootfs clean all
 
 RUN ls -alh /mnt/rootfs/usr
