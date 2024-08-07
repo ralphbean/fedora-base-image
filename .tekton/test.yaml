@@ -1,0 +1,34 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: test
+spec:
+  params:
+    - name: SNAPSHOT
+    - name: SCRIPT
+  results:
+    - name: PULLSPEC
+      description: Image that was tested
+  tasks:
+    - name: test
+      params:
+        - name: SNAPSHOT
+          value: "$(params.SNAPSHOT)"
+        - name: SCRIPT
+          value: "$(params.SCRIPT)"
+      results:
+        - name: PULLSPEC
+          description: Image that was tested
+      steps:
+        # Use yq image to extract the image pullspec
+        - name: prepare
+          image: quay.io/konflux-ci/yq:latest@sha256:974dea6375ee9df561ffd3baf994db2b61777a71f3bcf0050c5dca91ac9b3430
+          script: |
+            #!/bin/bash
+            echo $SNAPSHOT | yq -r '.components[0].containerImage' > $(results.PULLSPEC.path)
+        # Run the given script in the image under test
+        - name: test
+          image: $(results.PULLSPEC.path)
+          script: |
+            #!/bin/bash
+            $(params.SCRIPT)
