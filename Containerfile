@@ -28,14 +28,14 @@ RUN rm -rf /mnt/rootfs/var/cache/* /mnt/rootfs/var/log/dnf* /mnt/rootfs/var/log/
 
 FROM scratch
 
-LABEL license="MIT",
-LABEL name="fedora",
-LABEL org.opencontainers.image.license="MIT",
-LABEL org.opencontainers.image.name="fedora",
-LABEL org.opencontainers.image.url="https://fedoraproject.org/",
-LABEL org.opencontainers.image.vendor="Fedora Project",
-LABEL org.opencontainers.image.version="40",
-LABEL vendor="Fedora Project",
+LABEL license="MIT"
+LABEL name="fedora"
+LABEL org.opencontainers.image.license="MIT"
+LABEL org.opencontainers.image.name="fedora"
+LABEL org.opencontainers.image.url="https://fedoraproject.org/"
+LABEL org.opencontainers.image.vendor="Fedora Project"
+LABEL org.opencontainers.image.version="40"
+LABEL vendor="Fedora Project"
 LABEL version="40"
 
 COPY --from=builder /mnt/rootfs/ /
