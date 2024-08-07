@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:40 as builder
+FROM registry.fedoraproject.org/fedora:41 as builder
 
 RUN mkdir -p /mnt/rootfs
 
