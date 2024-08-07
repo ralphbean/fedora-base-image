@@ -3,6 +3,8 @@ FROM registry.fedoraproject.org/fedora:40 as builder
 RUN mkdir -p /mnt/rootfs
 
 RUN cat /etc/yum.repos.d/cachi2.repo
+RUN sed -i 's|gpgcheck|gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch\ngpgcheck|g' /etc/yum.repos.d/cachi2.repo || true
+RUN cat /etc/yum.repos.d/cachi2.repo
 
 RUN \
     dnf install --installroot /mnt/rootfs \
